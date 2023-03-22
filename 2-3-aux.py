@@ -9,7 +9,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(leds, GPIO.OUT)
 GPIO.setup(aux, GPIO.IN)
 
-while True:
-    for i in range(8):
-        GPIO.output(leds[i], GPIO.input(aux[i]))
-        time.sleep(0.1)
+
+#while True:
+ #   for i in range(8):
+  #      GPIO.output(leds[i], GPIO.input(aux[i]))
+   #     time.sleep(0.1)

@@ -18,10 +18,11 @@ try:
             print("not a number")
         else:
             period = int(p)/256/2
+                
             for i in range(256):
                 GPIO.output(dac, dec2bin(i))
                 time.sleep(period)   
-            for i in range(256, -1, -1):
+            for i in reversed(range(256)):
                 GPIO.output(dac, dec2bin(i))
                 time.sleep(period)  
 finally:
