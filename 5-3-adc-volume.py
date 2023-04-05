@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-
 dac = [26, 19, 13, 6, 5, 11, 9, 10]
 leds = [21, 20, 16, 12, 7, 8, 25, 24]
 
@@ -35,13 +34,23 @@ def adc():
     return value
 
 
+
+def volume(value):
+    if value == 0: GPIO.output(leds, dec2bin(0))
+    elif 0 < value & value < 24: GPIO.output(leds, dec2bin(1))
+    elif 24 <= value & value < 24: GPIO.output(leds, dec2bin(3))
+    elif 24 <= value & value < 32: GPIO.output(leds, dec2bin(7))
+    elif 32 <= value & value < 40: GPIO.output(leds, dec2bin(15))
+    elif 40 <= value & value < 48: GPIO.output(leds, dec2bin(31))
+    elif 48 <= value & value < 56: GPIO.output(leds, dec2bin(63))
+    elif 56 <= value & value < 63: GPIO.output(leds, dec2bin(127))
+    else:  GPIO.output(leds, dec2bin(255))
+    
 try: 
     while True:
         value = adc()
-        signal = dec2bin(value)
-        GPIO.output(leds, signal)
-        
-        volt = value / (2**8) * 3.3
+        volume(value)
+        volt = value / 256 * 3.3
         print("value = {:^3}, volt = {:.2f}".format(value, volt))
 
 
